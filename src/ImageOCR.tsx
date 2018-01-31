@@ -63,18 +63,20 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 		fileReader.readAsArrayBuffer(file);
 	}
 	onUploadImage(event: React.SyntheticEvent<HTMLInputElement>) {
-		switch (event.currentTarget.files[0].type) {
-			case 'image/png':
-			case 'image/jpeg':
-				this.getImageBase64(event.currentTarget.files[0])
-				break
-			case 'application/pdf':
-				this.getPDFBase64(event.currentTarget.files[0])
-				break
-			default:
-				this.setState({
-					error: 'Incorrect format document'
-				})
+		if(event.currentTarget.files.length) {
+			switch (event.currentTarget.files[0].type) {
+				case 'image/png':
+				case 'image/jpeg':
+					this.getImageBase64(event.currentTarget.files[0])
+					break
+				case 'application/pdf':
+					this.getPDFBase64(event.currentTarget.files[0])
+					break
+				default:
+					this.setState({
+						error: 'Incorrect format document'
+					})
+			}
 		}
 	}
 	processDocument(crop: Blob) {
