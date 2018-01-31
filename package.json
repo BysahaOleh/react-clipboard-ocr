@@ -1,5 +1,5 @@
 {
-  "name": "react-image-ocr",
+  "name": "react-clipboard-ocr",
   "version": "1.0.0",
   "description": "React Component for copy text from image (JPG, PNG, PDF etc.)",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BysahaOleh/react-image-ocr.git"
+    "url": "git+https://github.com/BysahaOleh/react-clipboard-ocr.git"
   },
   "keywords": [
     "react",
@@ -22,7 +22,7 @@
   "author": "BysahaOleh <olehbusaha@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BysahaOleh/react-image-ocr/issues"
+    "url": "https://github.com/BysahaOleh/react-clipboard-ocr/issues"
   },
   "jest": {
     "transform": {
@@ -54,7 +54,7 @@
     "mapCoverage": true
   },
   "types": "index.d.ts",
-  "homepage": "https://github.com/BysahaOleh/react-image-ocr#readme",
+  "homepage": "https://github.com/BysahaOleh/react-clipboard-ocr#readme",
   "dependencies": {
     "pdfjs-dist": "^2.0.303",
     "rc-progress": "^2.2.5",
