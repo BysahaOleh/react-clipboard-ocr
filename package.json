@@ -1,0 +1,80 @@
+{
+  "name": "react-image-ocr",
+  "version": "1.0.0",
+  "description": "React Component for copy text from image (JPG, PNG, PDF etc.)",
+  "main": "index.js",
+  "scripts": {
+    "start": "rollup -c -w",
+    "postinstall": "cross-env NODE_ENV=production rollup -c",
+    "test": "jest -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BysahaOleh/react-image-ocr.git"
+  },
+  "keywords": [
+    "react",
+    "ocr",
+    "text",
+    "image",
+    "copy"
+  ],
+  "author": "BysahaOleh <olehbusaha@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BysahaOleh/react-image-ocr/issues"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "testPathIgnorePatterns": [
+      "/src/"
+    ],
+    "coverageDirectory": "coverage/",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "collectCoverage": true,
+    "mapCoverage": true
+  },
+  "types": "index.d.ts",
+  "homepage": "https://github.com/BysahaOleh/react-image-ocr#readme",
+  "dependencies": {
+    "pdfjs-dist": "^2.0.303",
+    "rc-progress": "^2.2.5",
+    "react": "^16.2.0",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-cropper": "^1.0.1",
+    "react-dom": "^16.2.0",
+    "rollup": "^0.53.0",
+    "rollup-plugin-css-only": "^0.4.0",
+    "rollup-plugin-typescript": "^0.8.1",
+    "styled-components": "^3.1.0",
+    "tesseract.js": "^1.0.10",
+    "typescript": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.0.0",
+    "@types/react": "^16.0.35",
+    "@types/react-dom": "^16.0.3",
+    "cross-env": "^5.1.3",
+    "jest": "^22.0.4",
+    "ts-jest": "^22.0.0"
+  }
+}
