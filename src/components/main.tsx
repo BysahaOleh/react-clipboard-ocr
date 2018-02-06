@@ -1,4 +1,5 @@
-import styled from "styled-components"
+import { Button as BI } from '../../'
+import styled from 'styled-components'
 
 export const Container = styled.div`
 	display: flex;
@@ -9,7 +10,8 @@ export const Container = styled.div`
 	position: relative;
 `
 export const HeaderContainer = styled.div`
-	
+	display: flex;
+	justify-content: space-between;
 `
 export const Button = styled.a`
 	display: inline-block;
@@ -19,6 +21,7 @@ export const Button = styled.a`
 	padding: 10px;
 	margin: 10px;
 	cursor: pointer;
+	user-select: none; 
 `
 export const Label = styled.label`
 	display: inline-block;
@@ -38,4 +41,20 @@ export const DocumentContainer = styled.div`
 	border: rgb(226, 226, 226);
 	min-height: 500px;
 	height: 100%;
+`
+
+export const NavigationBlock = styled.div`
+	display: flex;
+	margin: 0 0 15px 0;
+`
+
+export const NavigationButton = Button.extend`
+	font-size: 20px;
+	background-color: ${(props: BI.NavigationButton) => props.disabled ? '#4c4c4c' : '#77ad1f'};
+	color: ${(props: BI.NavigationButton) => props.disabled ? '#e8e8e8' : '#fff'};
+	padding: 5px 2px;
+	margin: 10px 5px;
+	width: 25px;
+	font-family: serif;
+	text-align: center;
 `

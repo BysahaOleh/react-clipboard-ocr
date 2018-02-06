@@ -1,6 +1,6 @@
 {
   "name": "react-clipboard-ocr",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "React Component for copy text from image (JPG, PNG, PDF etc.)",
   "main": "index.js",
   "scripts": {
