@@ -1,10 +1,12 @@
 import * as React from 'react'
-import { Line } from 'rc-progress'
+import {Line} from 'rc-progress'
+
 const pdfJS = require('pdfjs-dist')
 import ImageCropper from 'react-cropper'
+
 const Tesseract = require('tesseract.js/dist/tesseract.js')
 
-import { ImageOCR as Interface, Tesseract as TesseractInterface } from '../'
+import {ImageOCR as Interface, Tesseract as TesseractInterface} from '../'
 
 import {
 	Container,
@@ -17,7 +19,7 @@ import {
 	NavigationButton,
 	PageCounter
 } from './components/main'
-import { Alert, LoaderContainer, LoaderText, LoaderWrapper } from './components/loader'
+import {Alert, LoaderContainer, LoaderText, LoaderWrapper} from './components/loader'
 
 const styles = {
 	clipboardInput: {
@@ -93,22 +95,25 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 		this.cropper.clear()
 		this.uiCloseAlert()
 	}
+
 	cleanDocument() {
 		this.setState({
 			documents: [],
 			currentPage: 0
 		})
 	}
+
 	getImageBase64(file: Blob) {
 		const reader = new FileReader()
 		return new Promise((resolve) => {
 			reader.readAsDataURL(file)
 			reader.onloadend = function () {
-				resolve(reader.result)
+				resolve([reader.result])
 			}
 		})
 
 	}
+
 	getPDFBase64(file: Blob) {
 		const fileReader = new FileReader()
 		return new Promise((resolve, reject) => {
@@ -120,26 +125,31 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 						pages.push(pdf.getPage(i))
 					}
 
-					Promise.all(pages).then(function (documents: any[]) {
-						const canvases = []
-						const tasks = documents.map(doc => {
-							const scale = 1.5
-							const viewport = doc.getViewport(scale)
-							const canvas = document.createElement('canvas')
-							const context = canvas.getContext('2d')
-							canvas.height = viewport.height
-							canvas.width = viewport.width
+					Promise
+						.all(pages)
+						.then(function (documents: any[]) {
+							const canvases = []
+							const tasks = documents.map(doc => {
+								const scale = 1.5
+								const viewport = doc.getViewport(scale)
+								const canvas = document.createElement('canvas')
+								const context = canvas.getContext('2d')
+								canvas.height = viewport.height
+								canvas.width = viewport.width
 
-							canvases.push(canvas)
-							return doc.render({canvasContext: context, viewport: viewport}).promise
+								canvases.push(canvas)
+								return doc.render({canvasContext: context, viewport: viewport}).promise
+							})
+
+							Promise
+								.all(tasks)
+								.then((elements) => {
+									resolve(elements.map((element, key: number) => canvases[key].toDataURL('image/jpeg')))
+								})
 						})
-
-						Promise.all(tasks).then((elements) => {
-							resolve(elements.map((element, key: number) => canvases[key].toDataURL('image/jpeg')))
-						}).catch(error => {
+						.catch(error => {
 							reject(error)
 						})
-					})
 				})
 			}
 
@@ -152,16 +162,19 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 			this.processDocument(blob)
 		})
 	}
+
 	onMouseOut() {
 		this.setState({
 			flipping: false
 		})
 	}
+
 	onMouseOver() {
 		this.setState({
 			flipping: true
 		})
 	}
+
 	onUploadImage(event: React.SyntheticEvent<HTMLInputElement>) {
 		if (event.currentTarget.files.length) {
 			this.cleanDocument()
@@ -193,11 +206,13 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 			alert: text
 		})
 	}
+
 	uiCloseAlert() {
 		this.setState({
 			alert: null
 		})
 	}
+
 	uiNextPage() {
 		let {currentPage, documents} = this.state
 
@@ -205,6 +220,7 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 			currentPage: currentPage + 1 === documents.length ? currentPage : currentPage + 1
 		})
 	}
+
 	uiPrevPage() {
 		let {currentPage} = this.state
 
@@ -222,6 +238,7 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 			}
 		})
 	}
+
 	setOCRResult(result: TesseractInterface.Result) {
 		this.setState({
 			fetch: false,
@@ -229,11 +246,13 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 			clipboard: result.text
 		})
 	}
+
 	setMetaKey(status: boolean) {
 		this.setState({
 			metaKey: status
 		})
 	}
+
 	setPage(documents: string[]) {
 		this.setState({
 			documents
@@ -254,6 +273,7 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 			)
 		}
 	}
+
 	renderDocument() {
 		let {documents, currentPage} = this.state
 		if (documents && documents.length) {
@@ -292,6 +312,7 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 		}
 		return null
 	}
+
 	renderLoader() {
 		let {fetch, progress} = this.state
 		if (fetch) {
@@ -305,6 +326,7 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 			)
 		}
 	}
+
 	renderNavigationBlock() {
 		let {documents, currentPage} = this.state
 
@@ -322,10 +344,11 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 			)
 		}
 	}
+
 	renderPageCounter() {
 		let {documents, currentPage} = this.state
 
-		if(documents && documents.length && documents.length > 1) {
+		if (documents && documents.length && documents.length > 1) {
 			return <PageCounter>{currentPage + 1}/{documents.length}</PageCounter>
 		}
 	}
