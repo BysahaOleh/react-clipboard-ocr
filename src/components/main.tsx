@@ -58,3 +58,8 @@ export const NavigationButton = Button.extend`
 	font-family: serif;
 	text-align: center;
 `
+
+export const PageCounter = styled.p`
+	font-size: 18px;
+	padding: 6px;
+`

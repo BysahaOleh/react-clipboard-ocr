@@ -14,7 +14,8 @@ import {
 	HeaderContainer,
 	Label,
 	NavigationBlock,
-	NavigationButton
+	NavigationButton,
+	PageCounter
 } from './components/main'
 import { Alert, LoaderContainer, LoaderText, LoaderWrapper } from './components/loader'
 
@@ -244,7 +245,10 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 
 		if (alert) {
 			return (
-				<LoaderWrapper onClick={() => this.uiCloseAlert()}>
+				<LoaderWrapper onClick={() => {
+					this.uiCloseAlert()
+					this.clipboardInput.clear()
+				}}>
 					<Alert>{alert}</Alert>
 				</LoaderWrapper>
 			)
@@ -318,6 +322,13 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 			)
 		}
 	}
+	renderPageCounter() {
+		let {documents, currentPage} = this.state
+
+		if(documents && documents.length && documents.length > 1) {
+			return <PageCounter>{currentPage + 1}/{documents.length}</PageCounter>
+		}
+	}
 
 	render() {
 		let {clipboard} = this.state
@@ -330,6 +341,7 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 						</Button>
 					</Label>
 					<input type="text" value={clipboard} ref={ref => this.clipboardInput = ref} style={styles.clipboardInput}/>
+					{this.renderPageCounter()}
 					{this.renderNavigationBlock()}
 				</HeaderContainer>
 				<FileInput
