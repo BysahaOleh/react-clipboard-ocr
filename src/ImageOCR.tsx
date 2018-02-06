@@ -202,7 +202,7 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 		let {currentPage, documents} = this.state
 
 		this.setState({
-			currentPage: currentPage === documents.length ? currentPage : currentPage + 1
+			currentPage: currentPage + 1 === documents.length ? currentPage : currentPage + 1
 		})
 	}
 	uiPrevPage() {
