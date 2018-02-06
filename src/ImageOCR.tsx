@@ -38,7 +38,7 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 	private keyUpListener: any
 
 	constructor(props: any) {
-		super(props);
+		super(props)
 
 		this.state = {
 			fetch: false,
@@ -100,9 +100,9 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 		})
 	}
 	getImageBase64(file: Blob) {
-		const reader = new FileReader();
+		const reader = new FileReader()
 		return new Promise((resolve) => {
-			reader.readAsDataURL(file);
+			reader.readAsDataURL(file)
 			reader.onloadend = function () {
 				resolve(reader.result)
 			}
@@ -110,7 +110,7 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 
 	}
 	getPDFBase64(file: Blob) {
-		const fileReader = new FileReader();
+		const fileReader = new FileReader()
 		return new Promise((resolve, reject) => {
 			fileReader.onload = function () {
 				pdfJS.getDocument(fileReader.result).then(function (pdf: any) {
@@ -143,7 +143,7 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 				})
 			}
 
-			fileReader.readAsArrayBuffer(file);
+			fileReader.readAsArrayBuffer(file)
 		})
 	}
 
@@ -247,7 +247,7 @@ export default class ImageOCR extends React.Component<Interface.Props, Interface
 			return (
 				<LoaderWrapper onClick={() => {
 					this.uiCloseAlert()
-					this.clipboardInput.clear()
+					this.cropper.clear()
 				}}>
 					<Alert>{alert}</Alert>
 				</LoaderWrapper>

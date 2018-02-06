@@ -61,5 +61,7 @@ export const NavigationButton = Button.extend`
 
 export const PageCounter = styled.p`
 	font-size: 18px;
-	padding: 6px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `
