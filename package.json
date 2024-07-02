@@ -56,7 +56,7 @@
   "types": "index.d.ts",
   "homepage": "https://github.com/BysahaOleh/react-clipboard-ocr#readme",
   "dependencies": {
-    "pdfjs-dist": "^2.0.303",
+    "pdfjs-dist": "^4.2.67",
     "rc-progress": "^2.2.5",
     "react": "^16.2.0",
     "react-copy-to-clipboard": "^5.0.1",
